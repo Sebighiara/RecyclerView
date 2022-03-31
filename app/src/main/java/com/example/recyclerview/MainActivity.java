@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -12,26 +13,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.list_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        Button addButton = findViewById(R.id.addButton);
+        Button deleteButton = findViewById(R.id.deleteButton);
+
         ListAdapter adapter = new ListAdapter();
         recyclerView.setAdapter(adapter);
 
-
-        DataModel modelOne = new DataModel();
-        modelOne.setTitleOne("Title one");
-        modelOne.setTitleTwo("Title two");
-        adapter.addData(modelOne);
-
-        DataModel modelTwo = new DataModel();
-        modelTwo.setTitleOne("component two");
-        modelTwo.setTitleTwo("component two");
-        adapter.addData(modelTwo);
-
-
-        DataModel modelThree = new DataModel();
-        modelThree.setTitleOne("component three");
-        modelThree.setTitleTwo("component three");
-        adapter.addData(modelThree);
+        addButton.setOnClickListener(view -> {
+            DataModel model = new DataModel();
+            model.setTitleOne("Title 1");
+            model.setTitleTwo("Title 2");
+            model.setDeleteButton("Delete");
+            adapter.addData(model);
+        });
 
 
     }
