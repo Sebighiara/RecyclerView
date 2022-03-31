@@ -3,10 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable/custom_button.xml" value="0.122" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.24317321777343753" />
         <entry key="app/src/main/res/layout/cardview.xml" value="0.1671195652173913" />
-        <entry key="app/src/main/res/layout/recyclerview_item_layout.xml" value="0.2296875" />
+        <entry key="app/src/main/res/layout/recyclerview_item_layout.xml" value="0.1" />
       </map>
     </option>
   </component>

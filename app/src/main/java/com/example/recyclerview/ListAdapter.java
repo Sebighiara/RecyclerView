@@ -1,5 +1,6 @@
 package com.example.recyclerview;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
 
     private List<DataModel> dataModelList = new ArrayList<>();
 
+    private OnAdapterClickListener listener;
+
+    public void setListener(OnAdapterClickListener listener) {
+        this.listener = listener;
+    }
     public void setData(List<DataModel> data) {
+        dataModelList.clear();
         dataModelList.addAll(data);
         notifyDataSetChanged(); //??
     }
@@ -34,7 +41,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListViewHolder> {
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ListViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(viewType, parent, false));
+                .inflate(viewType, parent, false),listener);
     }
 
     @Override
@@ -59,10 +66,12 @@ class ListViewHolder extends RecyclerView.ViewHolder {
     TextView titleTwo;
     ImageView imageView;
     Button deleteButton;
+    OnAdapterClickListener listener;
 
 
-    public ListViewHolder(@NonNull View itemView) {
+    public ListViewHolder(@NonNull View itemView,OnAdapterClickListener listener) {
         super(itemView);
+        this.listener = listener;
         titleOne = itemView.findViewById(R.id.recycler_title_one);
         titleTwo = itemView.findViewById(R.id.recycler_title_two);
         imageView = itemView.findViewById(R.id.recycler_image);
@@ -74,6 +83,10 @@ class ListViewHolder extends RecyclerView.ViewHolder {
         titleOne.setText(dataModel.getTitleOne());
         titleTwo.setText(dataModel.getTitleTwo());
         deleteButton.setText(dataModel.getDeleteButton());
+
+        deleteButton.setOnClickListener(view -> {
+            listener.onClick(position);
+        });
 
         Glide.with(imageView)
                 .load("https://ii1.pepperfry.com/media/catalog/product/p/r/800x880/print-mantras-snooping-mickey-mouse-wall-sticker-print-mantras-snooping-mickey-mouse-wall-sticker-eqyg8m.jpg")
